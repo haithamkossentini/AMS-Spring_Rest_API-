@@ -1,11 +1,17 @@
 package com.sip.ams.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Provider {
@@ -24,7 +30,17 @@ public class Provider {
     @NotBlank(message = "Email is mandatory")
     @Column(name = "email")
     private String email;
+    @JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "provider")
+    private List<Article> articles;
 
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticle(List<Article> articles) {
+        this.articles = articles;
+    }
     public Provider() {}
 
     public Provider(String name, String address, String email) {
@@ -61,4 +77,17 @@ public class Provider {
     public String getAddress() {
         return address;
     }
+
+	@Override
+	public String toString() {
+		return "Provider [name=" + name + ", address=" + address + ", email=" + email + ", articles=" + articles + "]";
+	}
+
+	/*@Override
+	public String toString() {
+		return "Provider [name=" + name + ", address=" + address + ", email=" + email + "]";
+	}*/
+
+	
+    
 }
