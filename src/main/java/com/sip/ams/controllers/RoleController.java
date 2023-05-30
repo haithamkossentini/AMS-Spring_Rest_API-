@@ -1,12 +1,16 @@
 package com.sip.ams.controllers;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,13 +55,12 @@ public class RoleController {
         model.addAttribute("nbr", nbr);
         return "role/listRoles";
     }*/
-    
-    @GetMapping("add")
-    public String showAddRoleForm() {
-
-    	//m.addAttribute("Role",new Role("Admin"));
-        return "role/addRole";
+    @PostMapping("/")
+    public Role createRole(@Valid @RequestBody Role role) {
+        return roleService.saveRole(role);
     }
+    
+ 
     
     @PostMapping("add")
     public String addRole(@RequestParam("role") String role) {
