@@ -37,9 +37,8 @@ public class Article {
     @Column(name = "picture")
     private String picture;
 
-    /**** Many To One ****/
-    @JsonIgnore	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    /**** Many To One ****/	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "provider_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Provider provider;
@@ -52,15 +51,19 @@ public class Article {
 		this.price = price;
 		this.picture = picture;
 	}*/
+    public Article(String label, float price, String picture) {
+        this.price = price;
+        this.label = label;
+        this.picture = picture;
+        }
 	
-	public Article(@NotBlank(message = "Label is mandatory") String label, Float price,
-			@NotBlank(message = "Picture is mandatory") String picture, Provider provider) {
-		super();
-		this.label = label;
-		this.price = price;
-		this.picture = picture;
-		this.provider = provider;
-	}
+    public Article(String label, float price, String picture,Provider provider) {
+        this.price = price;
+        this.label = label;
+        this.picture = picture;
+        this.provider = provider;
+        }
+
 	
 	public long getId() {
 		return id;

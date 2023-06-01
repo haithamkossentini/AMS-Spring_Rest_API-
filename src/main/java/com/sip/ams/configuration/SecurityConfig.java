@@ -16,7 +16,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder passwordEncoder;*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest()
-				.authenticated().and().httpBasic();
+		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		.antMatchers("/register").permitAll()
+		.antMatchers("/users/").permitAll()
+		.anyRequest().authenticated().and().httpBasic();
 	}
+	
 }

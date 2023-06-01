@@ -30,6 +30,10 @@ public class Provider {
     @NotBlank(message = "Email is mandatory")
     @Column(name = "email")
     private String email;
+    
+    @Column(name = "nomImage")
+	private String nomImage;
+    
     @JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "provider")
     private List<Article> articles;
@@ -43,12 +47,26 @@ public class Provider {
     }
     public Provider() {}
 
-    public Provider(String name, String address, String email) {
+   /* public Provider(String name, String address, String email) {
         this.name = name;
         this.address = address;
         this.email = email;
     }
+*/
+    public Provider(String name, String address, String email, String nomImage) {
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.nomImage = nomImage;
 
+	}
+    public String getNomImage() {
+		return nomImage;
+	}
+
+	public void setNomImage(String nomImage) {
+		this.nomImage = nomImage;
+	}
     public void setId(long id) {
         this.id = id;
     }

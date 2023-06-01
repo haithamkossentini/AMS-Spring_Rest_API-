@@ -24,10 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sip.ams.entities.Provider;
 import com.sip.ams.entities.User;
 import com.sip.ams.repositories.ProviderRepository;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/users"})
-@CrossOrigin(origins="*")
 public class UserController {
     @Autowired
     UserService userService;
@@ -39,9 +38,13 @@ public class UserController {
 
     }
 
-    @PostMapping("/")
+    /*@PostMapping("/")
     public User createUser(@Valid @RequestBody User user) {
         return userService.saveUser2(user);
+    }*/
+    @PostMapping("/")
+    public void createUser(@Valid @RequestBody User user) {
+         userService.saveUser(user);
     }
 
     @PutMapping("/{userId}")
