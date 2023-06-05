@@ -12,13 +12,16 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-/*
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Bean
+  
+	//ki l'application tlanci nraj3o ce contexte 
+	
+	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
 	
-	}*/
+}

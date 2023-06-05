@@ -1,6 +1,8 @@
 package com.sip.ams.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -25,28 +27,21 @@ import com.sip.ams.services.RoleService;
 
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/role/")
 @CrossOrigin(origins="*")
 public class RoleController {
 	
-	
+
+    private final RoleRepository roleRepository;
+
     @Autowired
-    RoleService roleService;
-    
-	private final RoleRepository roleRepository;
-	@Autowired
     public RoleController(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
-    @GetMapping("/")
-    public List<Role> getAllArticles() {
 
-        return roleService.getAllRoles();
-
-    }
-	/*@GetMapping("/")
+	@GetMapping("list")
     public String listRoles(Model model) {
-    	
+
     	List<Role> roles = (List<Role>) roleRepository.findAll();
     	long nbr =  roleRepository.count();
     	if(roles.size()==0)
@@ -54,23 +49,48 @@ public class RoleController {
         model.addAttribute("roles", roles);
         model.addAttribute("nbr", nbr);
         return "role/listRoles";
-    }*/
-    @PostMapping("/")
-    public Role createRole(@Valid @RequestBody Role role) {
-        return roleService.saveRole(role);
-    }
-    
- 
-    
-    @PostMapping("add")
-    public String addRole(@RequestParam("role") String role) {
-        
-        System.out.println(role);
-        Role r = new Role(role);
-        Role rSaved = roleRepository.save(r);
-        System.out.println("role = "+ rSaved);
-        return "redirect:list";
     }
 
+
+
+   /* @PostMapping("add")
+    public Map addRole(@RequestParam("role") String role) {
+        Map<String,String> res = new HashMap<>();
+        Role existRole = null;
+        String added = "True";
+        //System.out.println(role);
+        Role r = new Role(role);
+         existRole = roleRepository.findByRole(role);
+        if(existRole == null) {
+            Role rSaved = roleRepository.save(r);
+            System.out.println("role = " + rSaved);
+        }
+        else{
+            System.out.println("role existe déjà");
+            added = "False";
+        }
+        res.put("role",role);
+        return res;
+    }*/
+
+	@PostMapping("add")
+    public Map addRole(@RequestParam("role") String role) {
+        Map<String,String> res = new HashMap<>();
+        Role existRole = null;
+        String added = "True";
+        //System.out.println(role);
+        Role r = new Role(role);
+         existRole = roleRepository.findByRole(role);
+        if(existRole == null) {
+            Role rSaved = roleRepository.save(r);
+            System.out.println("role = " + rSaved);
+        }
+        else{
+            System.out.println("role existe déjà");
+            added = "False";
+        }
+        res.put("role",role);
+        return res;
+    }
 
 }

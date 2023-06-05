@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sip.ams.entities.Provider;
 import com.sip.ams.entities.User;
 import com.sip.ams.repositories.ProviderRepository;
-@CrossOrigin(origins = "*")
+/*@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/users"})
 public class UserController {
@@ -42,6 +42,7 @@ public class UserController {
     public User createUser(@Valid @RequestBody User user) {
         return userService.saveUser2(user);
     }*/
+/*
     @PostMapping("/")
     public void createUser(@Valid @RequestBody User user) {
          userService.saveUser(user);
@@ -65,4 +66,4 @@ public class UserController {
 
 
 }
-
+*/
